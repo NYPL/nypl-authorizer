@@ -1,16 +1,14 @@
 /* eslint-disable semi */
 const chai = require('chai')
-const should = chai.should
 const chaiAsPromised = require('chai-as-promised')
 
-const Errors = require('../../lib/config/Errors')
 const MockEvent = require('../mock_event.json')
 const GatewayRequest = require('../../lib/models/GatewayRequest')
 
 chai.should()
 chai.use(chaiAsPromised)
 
-describe('DocsRetriever', () => {
+describe('PolicyGenerator', () => {
   describe('generateSuccessResponse', () => {
     it('should have a proper principalId', () => {
       let PolicyGenerator = require('../../lib/helpers/PolicyGenerator')

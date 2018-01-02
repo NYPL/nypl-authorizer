@@ -21,7 +21,7 @@ exports.handler = function jwtHandler (event, context, callback) {
   TokenHelper.setToken(gatewayRequest, Config)
     .then(gatewayRequest => TokenHelper.setDecodedToken(gatewayRequest, Config))
     .then(gatewayRequest => Validator.validateIssuer(gatewayRequest, Config))
-    .then(gatewayRequest => DocsRetriever.setApiDocs(gatewayRequest, Config))
+    .then(gatewayRequest => DocsRetriever.setApiDocs(gatewayRequest, Config, Cache))
     .then(gatewayRequest => Validator.validateScopes(gatewayRequest, Config))
     .then(gatewayRequest => {
       return callback(null, PolicyGenerator.generateSuccessResponse(gatewayRequest))
