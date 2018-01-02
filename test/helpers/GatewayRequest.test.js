@@ -3,22 +3,19 @@ const chai = require('chai')
 const chaiAsPromised = require('chai-as-promised')
 
 const MockEvent = require('../mock_event.json')
+const GatewayRequest = require('../../lib/models/GatewayRequest')
 
 chai.should()
 chai.use(chaiAsPromised)
 
 describe('GatewayRequest', () => {
   it('should return a proper resource', () => {
-    let GatewayRequest = require('../../lib/models/GatewayRequest')
-
     let request = new GatewayRequest(MockEvent)
 
     request.getResource().should.equal(`arn:aws:execute-api:us-east-1:224280085904:1fg5jou30a/*`)
   })
 
   it('should return a proper path', () => {
-    let GatewayRequest = require('../../lib/models/GatewayRequest')
-
     let request = new GatewayRequest(MockEvent)
 
     request.getPath()
@@ -27,8 +24,6 @@ describe('GatewayRequest', () => {
   })
 
   it('should return a proper method', () => {
-    let GatewayRequest = require('../../lib/models/GatewayRequest')
-
     let request = new GatewayRequest(MockEvent)
 
     request.getMethod()
@@ -37,8 +32,6 @@ describe('GatewayRequest', () => {
   })
 
   it('should return proper scopes if they exist', () => {
-    let GatewayRequest = require('../../lib/models/GatewayRequest')
-
     let request = new GatewayRequest(MockEvent)
 
     let scopes = `scope1 scope2`;
@@ -51,8 +44,6 @@ describe('GatewayRequest', () => {
   })
 
   it('should return a blank array of scopes if none exist', () => {
-    let GatewayRequest = require('../../lib/models/GatewayRequest')
-
     let request = new GatewayRequest(MockEvent)
 
     request.setDecodedToken({})
@@ -61,8 +52,6 @@ describe('GatewayRequest', () => {
   })
 
   it('should return a blank array of scopes if none exist', () => {
-    let GatewayRequest = require('../../lib/models/GatewayRequest')
-
     let request = new GatewayRequest(MockEvent)
 
     request.setDecodedToken({})
@@ -71,8 +60,6 @@ describe('GatewayRequest', () => {
   })
 
   it('should return an array of required scopes', () => {
-    let GatewayRequest = require('../../lib/models/GatewayRequest')
-
     let request = new GatewayRequest(MockEvent)
 
     request.setApiDocs(require('./../mock_docs.json'))
@@ -81,8 +68,6 @@ describe('GatewayRequest', () => {
   })
 
   it('should return an JSON principal ID', () => {
-    let GatewayRequest = require('../../lib/models/GatewayRequest')
-
     let request = new GatewayRequest(MockEvent)
 
     request.generatePrincipalId().should.be.a('string')
