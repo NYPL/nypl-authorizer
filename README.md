@@ -73,30 +73,25 @@ Running the following NPM Commands will:
 $ npm run setup-local-env // Used in local development when running `npm run local-run`
 ```
 
-* Set up your **DEVELOPMENT** `.env` file as `./config/dev.env`
+* Set up your **DEVELOPMENT** `.env` file as `./config/development.env`
 ```console
-$ npm run setup-dev-env
+$ npm run setup-development-env
 ```
 
-* Set up your **PRODUCTION** `.env` file as `./config/prod.env`
+* Set up your **PRODUCTION** `.env` file as `./config/production.env`
 ```console
-$ npm run setup-prod-env
+$ npm run setup-production-env
 ```
 
 These environment specific `.env` files will be used to set **environment variables** when deployed by the `node-lambda` module.
 
 An example of the sample deployment environment `.env` file:
 ```console
-NYPL_DATA_API_URL=XXX
-OAUTH_PROVIDER_URL=XXX
-OAUTH_PROVIDER_SCOPE=XXX // Encrypted in AWS
-OAUTH_CLIENT_ID=XXX // Encrypted in AWS
-OAUTH_CLIENT_SECRET=XXX // Encrypted in AWS
-HOLD_REQUEST_SCHEMA_NAME=XXX
-HOLD_REQUEST_RESULT_STREAM_NAME=XXX
-SCSB_API_BASE_URL=XXX
-SCSB_API_KEY=XXX // Encrypted in AWS
-NODE_ENV=XXX // Use `development` when developing locally via `npm run local-run`. If deploying to AWS via `npm run deploy-ENV` use `production`, this will trigger the decryption client for encrypted ENV variables.
+MATCH_ISSUER=true                                        // Require that a token's issuer (`iss`) on a request match
+REQUIRED_ISSUER=isso.nypl.org                            // If matching an issuer, the request's issuer must match this value
+APIDOCS_URL=https://platformdocs.nypl.org/api/v0.1.json  // Full URL to API documentation
+DEBUG_TOKEN=eyJ0eX...                                    // A token to use when debugging locally
+NODE_ENV=XXX                                             // Use `local` when developing locally via `npm run local-run`. If deploying to AWS via `npm run deploy-ENV` use `production`, this will trigger the decryption client for encrypted ENV variables.
 ```
 
 #### Step 4: Setup your environment specific `event_sources_{environment}.json` file
@@ -106,25 +101,25 @@ You **must** edit the file once created and add your specific **EventSourceArn**
 
 Running the following NPM Commands will:
 
-* Set up your **DEVELOPMENT** `event_sources_dev.json` file in `./config/`
+* Set up your **DEVELOPMENT** `event_sources_development.json` file in `./config/`
 ```console
-$ npm run setup-dev-sources
+$ npm run setup-development-sources
 ```
 
-* Set up your **PRODUCTION** `event_sources_prod.json` file in `./config/`
+* Set up your **PRODUCTION** `event_sources_production.json` file in `./config/`
 ```console
-$ npm run setup-prod-sources
+$ npm run setup-production-sources
 ```
 ### Developing Locally
 To develop and run your Lambda locally you must ensure to complete `Step 1` and `Step 2` of the Setup process.
 
 ***REMINDER:*** Your `./config/local.env` and `./.env` environment variables ***MUST*** be configured in order for the next step to work.
 
-Next, run the following NPM command to use the **sample** event found in `./sample/sample_event.json`.
+Next, run the following NPM command to use the **sample** events found in `./sample/events`.
 
 > Exceutes `node lambda run` pointing the the sample event.
 ```console
-$ npm run local-run
+$ npm run bib
 ```
 
 ### Deploying your Lambda
@@ -176,23 +171,3 @@ $ npm run lint // Will lint all files except those listed in package.json under 
 ```javascript
 $ npm run lint [filename].js // Will lint the specific JS file
 ```
-
-## NPM Dependencies
-* [nypl-streams-client](https://www.npmjs.com/package/@nypl/nypl-streams-client)
-* [nypl-scsb-rest-client](https://www.npmjs.com/package/@nypl/scsb-rest-client)
-* [aws-sdk](https://www.npmjs.com/package/aws-sdk)
-* [async](https://www.npmjs.com/package/async)
-* [axios](https://www.npmjs.com/package/axios)
-* [circular-json](https://www.npmjs.com/package/circular-json)
-* [lambda-env-vars](https://www.npmjs.com/package/lambda-env-vars)
-* [qs](https://www.npmjs.com/package/qs)
-* [winston](https://www.npmjs.com/package/winston)
-* [winston-slack-hook](https://www.npmjs.com/package/winston-slack-hook)
-* [node-lambda](https://www.npmjs.com/package/node-lambda)
-* [mocha](https://www.npmjs.com/package/mocha)
-* [chai](https://www.npmjs.com/package/chai)
-* [coveralls](https://www.npmjs.com/package/coveralls)
-* [sinon](https://www.npmjs.com/package/sinon)
-* [sinon-chai](https://www.npmjs.com/package/sinon-chai)
-* [standard-js](https://www.npmjs.com/package/standard)
-* [istanbul](https://github.com/istanbuljs/nyc)
