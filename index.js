@@ -1,5 +1,9 @@
 const GatewayRequest = require('./lib/models/GatewayRequest')
 const Logger = require('./lib/helpers/Logger')
+const Config = require('./lib/config/Config')
+
+const NodeCache = require('node-cache')
+const Cache = new NodeCache({stdTTL: Config.cacheDefaultTtl, checkperiod: 0})
 
 const TokenHelper = require('./lib/helpers/TokenHelper')
 const Validator = require('./lib/helpers/Validator')
@@ -14,11 +18,11 @@ const PolicyGenerator = require('./lib/helpers/PolicyGenerator')
 exports.handler = function jwtHandler (event, context, callback) {
   let gatewayRequest = new GatewayRequest(event)
 
-  TokenHelper.setToken(gatewayRequest)
-    .then(gatewayRequest => TokenHelper.setDecodedToken(gatewayRequest))
-    .then(gatewayRequest => Validator.validateIssuer(gatewayRequest))
-    .then(gatewayRequest => DocsRetriever.setApiDocs(gatewayRequest))
-    .then(gatewayRequest => Validator.validateScopes(gatewayRequest))
+  TokenHelper.setToken(gatewayRequest, Config)
+    .then(gatewayRequest => TokenHelper.setDecodedToken(gatewayRequest, Config))
+    .then(gatewayRequest => Validator.validateIssuer(gatewayRequest, Config))
+    .then(gatewayRequest => DocsRetriever.setApiDocs(gatewayRequest, Config))
+    .then(gatewayRequest => Validator.validateScopes(gatewayRequest, Config))
     .then(gatewayRequest => {
       return callback(null, PolicyGenerator.generateSuccessResponse(gatewayRequest))
     })
