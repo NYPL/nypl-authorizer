@@ -1,0 +1,46 @@
+{
+  "name": "nypl-authorizer",
+  "version": "0.1.0",
+  "description": "Custom authorizer for NYPL API Gateway",
+  "main": "index.js",
+  "scripts": {
+    "deploy-development": "./node_modules/.bin/node-lambda deploy -e development -f config/var_development.env -S config/event_sources_development.json -o arn:aws:iam::224280085904:role/lambda_basic_execution -P nypl-sandbox",
+    "deploy-production": "./node_modules/.bin/node-lambda deploy -e production -f config/var_production.env -S config/event_sources_production.json -o 'arn:aws:iam::946183545209:role/lambda-full-access' -P nypl-digital-dev",
+
+    "test-bib": "./node_modules/.bin/node-lambda run -j tests/events/bib.json -x tests/events/context.json",
+    "test-bibs": "./node_modules/.bin/node-lambda run -j tests/events/bib.json -x tests/events/context.json",
+    "test-create-bib": "./node_modules/.bin/node-lambda run -j tests/events/create_bib.json -x tests/events/context.json",
+    "test-fakeroute": "./node_modules/.bin/node-lambda run -j tests/events/fakeroute.json -x tests/events/context.json",
+
+    "setup-node-lambda-env": "cp ./sample/.env.sample ./.env",
+    "setup-local-env": "mkdir -p config && cp ./sample/deployment.env.sample ./config/local.env",
+    "setup-dev-env": "mkdir -p config && cp ./sample/deployment.env.sample ./config/development.env",
+    "setup-prod-env": "mkdir -p config && cp ./sample/deployment.env.sample ./config/production.env",
+    "setup-dev-sources": "cp ./sample/sample_event_sources.json ./config/event_sources_development.json",
+    "setup-prod-sources": "cp ./sample/sample_event_sources.json ./config/event_sources_production.json",
+
+    "lint": "./node_modules/.bin/standard",
+    "test": "NODE_ENV=test ./node_modules/.bin/nyc --reporter=lcov --reporter=text ./node_modules/mocha/bin/mocha",
+    "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls",
+    "coverage-report": "./node_modules/.bin/nyc report --reporter=html && npm run open-report",
+    "open-report": "open -a 'Google Chrome' ./coverage/index.html"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "jsonwebtoken": "^8.1.0",
+    "node-cache": "^4.1.1",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "node-lambda": "^0.11.5",
+    "axios-mock-adapter": "^1.10.0",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "coveralls": "^3.0.0",
+    "mocha": "^4.1.0",
+    "sinon": "^4.1.3",
+    "sinon-chai": "^2.14.0",
+    "standard": "^10.0.3",
+    "nyc": "^11.4.1"
+  }
+}
