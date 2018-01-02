@@ -1,9 +1,6 @@
 /* eslint-disable semi */
 const chai = require('chai')
-const should = chai.should
 const chaiAsPromised = require('chai-as-promised')
-
-const Config = require('../../lib/config/Config')
 
 chai.should()
 chai.use(chaiAsPromised)
