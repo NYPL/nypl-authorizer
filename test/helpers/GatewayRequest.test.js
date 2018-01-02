@@ -32,6 +32,8 @@ describe('GatewayRequest', () => {
 
     let request = new GatewayRequest(MockEvent)
 
+    request.getMethod()
+
     request.getMethod().should.equal(`get`)
   })
 
