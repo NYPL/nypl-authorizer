@@ -70,7 +70,7 @@ Running the following NPM Commands will:
 * Set up your **LOCAL** `.env` file as `./config/local.env` used for local development
 
 ```console
-$ npm run setup-local-env // Used in local development when running `npm run local-run`
+$ npm run setup-local-env
 ```
 
 * Set up your **DEVELOPMENT** `.env` file as `./config/development.env`
@@ -129,12 +129,12 @@ The following NPM Commands will execute the `node-lambda deploy` command mapping
 
 * Runs `node-lambda deploy` with **DEVELOPMENT** configurations
 ```console
-$ npm run deploy-dev
+$ npm run deploy-development
 ```
 
 * Runs `node-lambda deploy` with **PRODUCTION** configurations
 ```console
-$ npm run deploy-prod
+$ npm run deploy-production
 ```
 
 ### Tests

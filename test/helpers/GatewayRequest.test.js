@@ -3,7 +3,6 @@ const chai = require('chai')
 const chaiAsPromised = require('chai-as-promised')
 
 const MockEvent = require('../mock_event.json')
-const GatewayRequest = require('../../lib/models/GatewayRequest')
 
 chai.should()
 chai.use(chaiAsPromised)

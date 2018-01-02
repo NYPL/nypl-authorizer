@@ -40,5 +40,17 @@
     "mocha": "^4.1.0",
     "standard": "^10.0.3",
     "nyc": "^11.4.1"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "context",
+      "before",
+      "beforeEach",
+      "after",
+      "afterEach",
+      "it",
+      "expect"
+    ]
   }
 }
