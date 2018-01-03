@@ -96,10 +96,21 @@ describe('Validator', () => {
   })
 
   describe('validateScopes', () => {
-    it('should return a resolved Promise if no required scopes are found', () => {
+    it('should return a resolved Promise if no required scopes are found and route is valid', () => {
       let Validator = require('../../lib/helpers/Validator')
 
       let request = new GatewayRequest(MockEvent)
+
+      request.apiDocs = {
+        paths: {
+          '/api/v0.1/bibs': {
+            get: true
+          }
+        }
+      }
+
+      request.path = '/api/v0.1/bibs'
+      request.method = 'get'
 
       let Config = {}
 
@@ -199,6 +210,18 @@ describe('Validator', () => {
       let result = Validator.validateScopes(request, Config)
 
       return result.should.be.fulfilled
+    })
+
+    it('should return a rejected Promise with an error if the route is not found', () => {
+      let Validator = require('../../lib/helpers/Validator')
+
+      let request = new GatewayRequest(MockEvent)
+
+      let Config = {}
+
+      let result = Validator.validateScopes(request, Config)
+
+      return result.should.be.rejectedWith(Errors.NoDocumentationRequestError)
     })
   })
 })

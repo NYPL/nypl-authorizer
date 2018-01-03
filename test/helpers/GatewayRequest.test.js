@@ -72,4 +72,25 @@ describe('GatewayRequest', () => {
 
     request.generatePrincipalId().should.be.a('string')
   })
+
+  it('should return the docs for the route', () => {
+    let request = new GatewayRequest(MockEvent)
+
+    let routeApiDocs = 'route_api_docs'
+
+    request.apiDocs = {
+      paths: {
+        '/api/v0.1/bibs': {
+          get: routeApiDocs
+        }
+      }
+    }
+
+    request.path = '/api/v0.1/bibs'
+    request.method = 'get'
+
+    request.getRouteApiDocs()
+
+    request.getRouteApiDocs().should.deep.equal(routeApiDocs)
+  })
 })

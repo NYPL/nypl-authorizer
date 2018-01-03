@@ -54,7 +54,7 @@
       "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36",
       "user": null
     },
-    "resourcePath": "/fakeroute",
+    "resourcePath": "/api/v0.1/fakeroute",
     "httpMethod": "GET",
     "apiId": "1fg5jou30a"
   }
