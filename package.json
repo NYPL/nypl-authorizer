@@ -11,6 +11,7 @@
     "bibs": "./node_modules/.bin/node-lambda run -f config/local.env -j sample/events/bibs.json -x sample/events/context.json",
     "create-bib": "./node_modules/.bin/node-lambda run -f config/local.env -j sample/events/create_bib.json -x sample/events/context.json",
     "fakeroute": "./node_modules/.bin/node-lambda run -f config/local.env -j sample/events/fakeroute.json -x sample/events/context.json",
+    "patron": "./node_modules/.bin/node-lambda run -f config/local.env -j sample/events/patron.json -x sample/events/context.json",
 
     "setup-node-lambda-env": "cp ./sample/.env.sample ./.env",
     "setup-local-env": "mkdir -p config && cp ./sample/deployment.env.sample ./config/local.env",
