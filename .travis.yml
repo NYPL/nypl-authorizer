@@ -5,9 +5,9 @@ cache:
   directories:
   - node_modules
 install: npm install
-before_script: echo -e 'Running unit tests'
+before_script: echo 'Running unit tests'
 script: npm test
-before_deploy: echo -e 'All unit tests passed; Preparing to deploy to AWS'
+before_deploy: echo 'All unit tests passed; Preparing to deploy to AWS'
 deploy:
 - provider: script
   skip_cleanup: true
@@ -19,7 +19,7 @@ deploy:
   script: npm run deploy-production
   on:
     branch: master
-after_deploy: echo -e 'Successfully deployed to AWS'
+after_deploy: echo 'Successfully deployed to AWS'
 env:
   global:
     secure: ljtR3wHHQRjCUU8h9kM5eWG8HZWPf+lj1v6y12UzHeXJD4ju9RwT66zGmGd1bQH3YmCzYBzaakinS9Do/zLfoAlbx8/s1UHPiV5aM5xzgyE2jxb3USLsiz0sNvDBrazaL+VOjMZDrRgwZoosY0DQ6aCwGM0bxhP8jXuo3Fr9t0l9AfbAJcivKeHJaNiYgDPVeckuRuDBLTgsYdgVatfuqVIlgCwM7OQ8rhI7QQf6Wppij97p3N6BrbWd3y4kTX20ob0nVJjhJ1oage8HBaJ00xGzaffzBBgoy/I0GIo6EoCmz1tBWK5iebAk9nAzG+RaYAuI6AyQymi9WpgFOOF2FnQuJ4y1xlgjmDWjSZkx/BIo4teooW7H2MXAbROF+w4DC1NWMQlh6bQcV3RQa1cvYgPeoMNDgQn0iWG5PCmr6k3EeDXzNHLRcHruzdsuUDGjenHlmRfzr3qQpqL8BFaNukoF4NjUj/t29NLzWZ/v5OMAj7LtxlZlwORhzIWPTEwdWxpM4l3rY2OJXGpJ6Sum7E1x+H7EFzfULrmXUhukeC9cgxygiFgOjs+8FrIaZgB8aDIGL4GECDohWvhGdW8BAHkNuCvu9YMvNSpjTadgzqIMGpevBfqA+2HDHB3KGSIeCoYae1HydpdbOdriQ888gXIJVYjGL232WYUflfZurR8=
