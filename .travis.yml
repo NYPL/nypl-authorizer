@@ -9,12 +9,13 @@ before_script: echo 'Running unit tests'
 script: npm test
 before_deploy: echo 'All unit tests passed; Preparing to deploy to AWS'
 deploy:
-  skip_cleanup: true
   - provider: script
+    skip_cleanup: true
     script: npm run deploy-development
     on:
       branch: deploy-test
   - provider: script
+    skip_cleanup: true
     script: npm run deploy-production
     on:
       branch: master
