@@ -9,17 +9,17 @@ before_script: echo 'Running unit tests'
 script: npm test
 before_deploy: echo 'All unit tests passed; Preparing to deploy to AWS'
 deploy:
-  - provider: script
-    skip_cleanup: true
-    script: npm run deploy-development
-    on:
-      branch: deploy-test
-  - provider: script
-    skip_cleanup: true
-    script: npm run deploy-production
-    on:
-      branch: master
+- provider: script
+  skip_cleanup: true
+  script: npm run deploy-development
+  on:
+    branch: deploy-test
+- provider: script
+  skip_cleanup: true
+  script: npm run deploy-production
+  on:
+    branch: master
 after_deploy: echo 'Successfully deployed to AWS'
 env:
   global:
-    secure: Qlr4ziwe6/Ma2lKHFUuLLoGrT8IaC3MdxE/OXrEoQPibcEj7TWEZY+LNpxrwhbOq+1IZ0WgIaFdd4/k0AfH6aRe7Va06lZX8QOqrXvMoOi1S67B0GRx1Scos2fD5G15j1n2IKZpCu018oVWIBxRcCIooouYh0LLl865dQyjYpCaZi9DFcOc1yUunJy7bjRXfVtKltgbqtZw2e8csevl6QN8WN9SgnjsqAc1not6qa3scbmZXoGAW4rPQJO7Th8it7iyHMUTQjQ52kIFdLwV7ZtnOFwne5RI+3M88DEpL1F+2lfyZRecnYeDFu6OeLvu4mSqmsBWemdW6ftW1bvOcn4GniBgMJC+IVsEJRgK1MY5UAexT4fsgmLSw5lCAaI5aY02pgopcw2qUrTyQSZbZfr5ZsmjKVCJ60fla90LbzWtnJh1+VJnFWXW0iTgrtdftmoHg4AGSbyLMRsospetQniGJGbLVzfMWQ5lmSzx/7dmwibzbcYUKOL9ak4TlbqtnIfXb+1xNzu3Ho5OGf3zYw/iHYo9e0D6Hru+dNMiCJZ1usrdzwDj46A/mUXRFsVP1ICHXb3tAns7tlDKSXDrtx3JyTWD0OS4evJrlqdtYB+Q+FwABcuRYReecwzeXTSEGgliDQyLejeoYOyP2cuaQCQSSQ79TCEfbNDIYVqB4FSQ=
+    secure: PV/FP1lGntQPNSxQrkdoMqaN1oo4ZXzSx1uRw4gu3T4ccl0kZ0lccb4Bce32QapYScHULZOSFTGKJSh1/ATM9GcR9ZZUXQpoJ6xCFXR+Nbpi2SXP4gGnMYJfUeIyYyZmFi4TiBvqC/cF9iQHvA/tkYxQoNmtMgEUHSW7ZwUw5w6x7yAhJhst/dhc1LkgmJh+mCSqPTulb6DI3fmAminv7yERtAAZJgE4B7HomtOuqJPlPWwOcoczp1CfwEQlGnENwDZRPPyJ19TySfNXeXXm2BZkyYwtiixrrgsYqOiOzw8EPXJkC8+g4k8dQ/LVmlFlEV+UA6V7+tZHw6NPFzEjuKgLOerPM7QWAIamRhQXuprIx5W2bWM3Lt57Xd8kutOe01gn+GQ1JgKIyqNo0EBRIN5EctV7kwBg8zKF3ja7ewaDF66f+/l6Ve7dq9PxvHD4r68sxFSTaeiAURZQ8lY6TJ5OH8U1JBNn3Gque/DaDddDhmclSsjzNgzq12sO+f4TIgcz0k5JMMaMdy1W3zQWDDxYK2yLW137NkHNc7pMEROeyYUtkRTGeFZgJdO/AgiDAcikZ/nP+oflHpld5ldrtlMqZyZP5FKCMZhzYtint+FPIQU8E3Aoy6T0Pjaw/5OtJKm5Vt70j7rLMfr87lc6hmGZFI/jigj63JJgK4JUGCk=
