@@ -9,15 +9,16 @@ before_script: echo 'Running unit tests'
 script: npm test
 before_deploy: echo 'All unit tests passed; Preparing to deploy to AWS'
 deploy:
-- provider: script
-  script: npm run deploy-development
-  on:
-    branch: deploy-test
-- provider: script
-  script: npm run deploy-production
-  on:
-    branch: master
+  skip_cleanup: true
+  - provider: script
+    script: npm run deploy-development
+    on:
+      branch: deploy-test
+  - provider: script
+    script: npm run deploy-production
+    on:
+      branch: master
 after_deploy: echo 'Successfully deployed to AWS'
 env:
   global:
-    secure: gnfJCyurA73gCac1r/DUl2f0pWdgcMyiohXHbYK0cTNkzVRhvvP3VqwJzPuFQqrlwybnNfQYHCH2rQoL/9eGnNvByM7LxX7conKqbXlTzVshFs36wxxlBig4Mbq0HweZZZNXlYab0MXTH6ITlGxjj63nCGCYIhyqF9bF/ftukcuyXMfpERPXrTMxDwGBDAp5f/y+ziUZYv6ErUEHWoWN5uqETIRiyuZU4FE00Pvw6IFMUIrNRWSSBp2aHVzKBFWN7pfNBRe87br02aqDxAiVICANfFc7U35zZRExbYFnRYFUjm2vSZNRVXSk5Jh+Oe/0quXRwKeRSZH7rhz4sngfI2hAz07/gaOcD9NA6nWw/Xcbmcr+Rp3Q3SRYEZOuJCeLgY75cM9WjRfGUQO9SIN1MIMC/QzCBLvAqqjrYrfxMkGngto63N8mu6BOUn5rqI1DvriqC2xQKAVFppjFaK1MhzNli05U3MjRObY4lQmpW7bonYDoMjrhmi8zY6xqoxcRQCEi7GQpLtiQmpkfVqp2J2dfw6WBK/2hlYI2b3YnM7phJFXJVoKrBGyAmnNIMtjMKzozSpZzols4HzXERwCiepQSjxn371zngJQKAwCTnWn2n3CdZH02c/HfuRSHjG98AvsYeFZpxWj6sRWJYYfz6eYxO7BqsVAtailJE0FjmQ4=
+    secure: Qlr4ziwe6/Ma2lKHFUuLLoGrT8IaC3MdxE/OXrEoQPibcEj7TWEZY+LNpxrwhbOq+1IZ0WgIaFdd4/k0AfH6aRe7Va06lZX8QOqrXvMoOi1S67B0GRx1Scos2fD5G15j1n2IKZpCu018oVWIBxRcCIooouYh0LLl865dQyjYpCaZi9DFcOc1yUunJy7bjRXfVtKltgbqtZw2e8csevl6QN8WN9SgnjsqAc1not6qa3scbmZXoGAW4rPQJO7Th8it7iyHMUTQjQ52kIFdLwV7ZtnOFwne5RI+3M88DEpL1F+2lfyZRecnYeDFu6OeLvu4mSqmsBWemdW6ftW1bvOcn4GniBgMJC+IVsEJRgK1MY5UAexT4fsgmLSw5lCAaI5aY02pgopcw2qUrTyQSZbZfr5ZsmjKVCJ60fla90LbzWtnJh1+VJnFWXW0iTgrtdftmoHg4AGSbyLMRsospetQniGJGbLVzfMWQ5lmSzx/7dmwibzbcYUKOL9ak4TlbqtnIfXb+1xNzu3Ho5OGf3zYw/iHYo9e0D6Hru+dNMiCJZ1usrdzwDj46A/mUXRFsVP1ICHXb3tAns7tlDKSXDrtx3JyTWD0OS4evJrlqdtYB+Q+FwABcuRYReecwzeXTSEGgliDQyLejeoYOyP2cuaQCQSSQ79TCEfbNDIYVqB4FSQ=
