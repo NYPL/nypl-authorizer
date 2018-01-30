@@ -1,24 +1,25 @@
 language: node_js
 node_js:
-  - "6"
+- '6'
 cache:
   directories:
-    - node_modules
+  - node_modules
 install: npm install
-before_script: "echo 'Running unit tests'"
+before_script: echo 'Running unit tests'
 script: npm test
-before_deploy: "echo 'All unit tests passed; Preparing to deploy to AWS'"
-#deploy:
-#  skip_cleanup: true
-#  provider: elasticbeanstalk
-#  access_key_id: $AWS_PRODUCTION_ACCESS_KEY_ID
-#  secret_access_key: "$AWS_PRODUCTION_ACCESS_SECRET"
-#  region: us-east-1
-#  app: $AWS_APP_NAME
-#  env: $AWS_ENVIRONMENT_NAME
-#  bucket_name: elasticbeanstalk-us-east-1-946183545209
-#  bucket_path: $AWS_APP_NAME
-#  on:
-#    repo: NYPL/nypl-dgx-react-header
-#    branch: master
-after_deploy: "echo 'Successfully deployed to AWS'"
+before_deploy: echo 'All unit tests passed; Preparing to deploy to AWS'
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: npm run deploy-development
+  on:
+    branch: deploy-test
+- provider: script
+  skip_cleanup: true
+  script: npm run deploy-production
+  on:
+    branch: master
+after_deploy: echo 'Successfully deployed to AWS'
+env:
+  global:
+    secure: ljtR3wHHQRjCUU8h9kM5eWG8HZWPf+lj1v6y12UzHeXJD4ju9RwT66zGmGd1bQH3YmCzYBzaakinS9Do/zLfoAlbx8/s1UHPiV5aM5xzgyE2jxb3USLsiz0sNvDBrazaL+VOjMZDrRgwZoosY0DQ6aCwGM0bxhP8jXuo3Fr9t0l9AfbAJcivKeHJaNiYgDPVeckuRuDBLTgsYdgVatfuqVIlgCwM7OQ8rhI7QQf6Wppij97p3N6BrbWd3y4kTX20ob0nVJjhJ1oage8HBaJ00xGzaffzBBgoy/I0GIo6EoCmz1tBWK5iebAk9nAzG+RaYAuI6AyQymi9WpgFOOF2FnQuJ4y1xlgjmDWjSZkx/BIo4teooW7H2MXAbROF+w4DC1NWMQlh6bQcV3RQa1cvYgPeoMNDgQn0iWG5PCmr6k3EeDXzNHLRcHruzdsuUDGjenHlmRfzr3qQpqL8BFaNukoF4NjUj/t29NLzWZ/v5OMAj7LtxlZlwORhzIWPTEwdWxpM4l3rY2OJXGpJ6Sum7E1x+H7EFzfULrmXUhukeC9cgxygiFgOjs+8FrIaZgB8aDIGL4GECDohWvhGdW8BAHkNuCvu9YMvNSpjTadgzqIMGpevBfqA+2HDHB3KGSIeCoYae1HydpdbOdriQ888gXIJVYjGL232WYUflfZurR8=
