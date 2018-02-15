@@ -1,5 +1,5 @@
 {
-  "name": "nypl-authorizer",
+  "name": "CustomAuthorizer",
   "version": "0.1.0",
   "description": "Custom authorizer for NYPL API Gateway",
   "main": "index.js",
