@@ -13,7 +13,7 @@ deploy:
   skip_cleanup: true
   script: npm run deploy-development
   on:
-    branch: deploy-test
+    branch: development
 - provider: script
   skip_cleanup: true
   script: npm run deploy-production
