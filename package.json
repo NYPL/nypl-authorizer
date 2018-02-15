@@ -1,7 +1,7 @@
 {
   "name": "CustomAuthorizer",
   "version": "0.1.0",
-  "description": "Custom authorizer for NYPL API Gateway",
+  "description": "Custom NYPL authorizer for AWS API Gateway",
   "main": "index.js",
   "scripts": {
     "deploy-development": "./node_modules/.bin/node-lambda deploy -e development -f ./config/development.env -S ./config/event_sources_development.json -o arn:aws:iam::224280085904:role/lambda_basic_execution -a $aws_access_key_id_development -s $aws_secret_access_key_development",
