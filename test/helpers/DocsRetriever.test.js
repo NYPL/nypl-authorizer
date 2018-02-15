@@ -4,8 +4,8 @@ const chaiAsPromised = require('chai-as-promised')
 
 const NodeCache = require('node-cache')
 
-var axios = require('axios')
-var MockAdapter = require('axios-mock-adapter')
+const axios = require('axios')
+const MockAdapter = require('axios-mock-adapter')
 
 const MockEvent = require('../mock_event.json')
 const GatewayRequest = require('../../lib/models/GatewayRequest')
