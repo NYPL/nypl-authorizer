@@ -1,6 +1,8 @@
 Custom Authorizer for NYPL API Gateway
 ======================================
 
+[![Coverage Status](https://coveralls.io/repos/github/NYPL/nypl-authorizer/badge.svg?branch=master)](https://coveralls.io/github/NYPL/nypl-authorizer?branch=master)
+
 An AWS Lambda written in Node JS to act as a [custom authorizer](https://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html) for the NYPL API Gateway on Amazon Web Services (AWS).
 
 ## Table of Contents
