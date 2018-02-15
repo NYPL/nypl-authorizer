@@ -116,7 +116,7 @@ describe('TokenHelper', () => {
       return result.should.be.rejected
     })
 
-    it('should return a rejected Promise if unable to decode token', () => {
+    it('should return a rejected Promise if decoding token fails', () => {
       const mockFs = require('mock-fs');
       mockFs({
         'path/to/fake/dir': 'publickey'
