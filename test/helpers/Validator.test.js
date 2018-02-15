@@ -11,13 +11,13 @@ chai.use(chaiAsPromised)
 
 describe('Validator', () => {
   describe('validateIssuer', () => {
-    it('should return resolved Promise is matchIssuer is not true', () => {
+    it('should return resolved Promise is checkIssuer is not true', () => {
       let Validator = require('../../lib/helpers/Validator')
 
       let request = new GatewayRequest(MockEvent)
 
       let Config = {
-        matchIssuer: `false`
+        checkIssuer: `false`
       }
 
       let result = Validator.validateIssuer(request, Config)
@@ -31,7 +31,7 @@ describe('Validator', () => {
       let request = new GatewayRequest(MockEvent)
 
       let Config = {
-        matchIssuer: `true`
+        checkIssuer: `true`
       }
 
       let result = Validator.validateIssuer(request, Config)
@@ -45,7 +45,7 @@ describe('Validator', () => {
       let request = new GatewayRequest(MockEvent)
 
       let Config = {
-        matchIssuer: `true`,
+        checkIssuer: `true`,
         requiredIssuer: `required_issuer`
       }
 
@@ -61,7 +61,7 @@ describe('Validator', () => {
       let requiredIssuer = `required_issuer`
 
       let Config = {
-        matchIssuer: `true`,
+        checkIssuer: `true`,
         requiredIssuer: requiredIssuer
       }
 
@@ -81,7 +81,7 @@ describe('Validator', () => {
       let requiredIssuer = `required_issuer`
 
       let Config = {
-        matchIssuer: `true`,
+        checkIssuer: `true`,
         requiredIssuer: requiredIssuer
       }
 
@@ -96,6 +96,20 @@ describe('Validator', () => {
   })
 
   describe('validateScopes', () => {
+    it('should return a resolved Promise if scope checking is disabled', () => {
+      let Validator = require('../../lib/helpers/Validator')
+
+      let request = new GatewayRequest(MockEvent)
+
+      let Config = {
+        checkScopes: 'false'
+      }
+
+      let result = Validator.validateScopes(request, Config)
+
+      return result.should.be.fulfilled
+    })
+
     it('should return a resolved Promise if no required scopes are found and route is valid', () => {
       let Validator = require('../../lib/helpers/Validator')
 
@@ -112,7 +126,9 @@ describe('Validator', () => {
       request.path = '/api/v0.1/bibs'
       request.method = 'get'
 
-      let Config = {}
+      let Config = {
+        checkScopes: 'true'
+      }
 
       let result = Validator.validateScopes(request, Config)
 
@@ -128,7 +144,9 @@ describe('Validator', () => {
         [`scope1`]
       ]
 
-      let Config = {}
+      let Config = {
+        checkScopes: 'true'
+      }
 
       let result = Validator.validateScopes(request, Config)
 
@@ -145,7 +163,10 @@ describe('Validator', () => {
       request.requiredScopeSets = [[`scope1`]]
       request.scopes = [adminScope]
 
-      let Config = {adminScope: adminScope}
+      let Config = {
+        checkScopes: 'true',
+        adminScope: adminScope
+      }
 
       let result = Validator.validateScopes(request, Config)
 
@@ -160,7 +181,9 @@ describe('Validator', () => {
       request.requiredScopeSets = [[`scope1`, `scope2`]]
       request.scopes = [`scope1`]
 
-      let Config = {}
+      let Config = {
+        checkScopes: 'true'
+      }
 
       let result = Validator.validateScopes(request, Config)
 
@@ -175,7 +198,9 @@ describe('Validator', () => {
       request.requiredScopeSets = [[`scope1`]]
       request.scopes = [`scope2`]
 
-      let Config = {}
+      let Config = {
+        checkScopes: 'true'
+      }
 
       let result = Validator.validateScopes(request, Config)
 
@@ -190,7 +215,9 @@ describe('Validator', () => {
       request.requiredScopeSets = [[`scope1`, `scope2`]]
       request.scopes = [`scope1`, `scope2`]
 
-      let Config = {}
+      let Config = {
+        checkScopes: 'true'
+      }
 
       let result = Validator.validateScopes(request, Config)
 
@@ -205,7 +232,9 @@ describe('Validator', () => {
       request.requiredScopeSets = [[`scope1`, `scope2`]]
       request.scopes = [`scope1`, `scope2`, `scope3`]
 
-      let Config = {}
+      let Config = {
+        checkScopes: 'true'
+      }
 
       let result = Validator.validateScopes(request, Config)
 
@@ -217,7 +246,9 @@ describe('Validator', () => {
 
       let request = new GatewayRequest(MockEvent)
 
-      let Config = {}
+      let Config = {
+        checkScopes: 'true'
+      }
 
       let result = Validator.validateScopes(request, Config)
 

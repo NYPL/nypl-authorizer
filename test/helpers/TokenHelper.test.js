@@ -2,9 +2,13 @@
 const chai = require('chai')
 const chaiAsPromised = require('chai-as-promised')
 
+const jwt = require('jsonwebtoken')
+
 const Errors = require('../../lib/config/Errors')
 const MockEvent = require('../mock_event.json')
 const GatewayRequest = require('../../lib/models/GatewayRequest')
+
+const sinon = require('sinon')
 
 chai.should()
 chai.use(chaiAsPromised)
@@ -107,9 +111,57 @@ describe('TokenHelper', () => {
       let request = new GatewayRequest(MockEvent)
       let Config = {}
 
-      let result = TokenHelper.setDecodedToken(request, Config)
+      let result = TokenHelper.setDecodedToken(request, Config, jwt)
 
       return result.should.be.rejected
+    })
+
+    it('should return a rejected Promise if unable to decode token', () => {
+      const mockFs = require('mock-fs');
+      mockFs({
+        'path/to/fake/dir': 'publickey'
+      })
+
+      let TokenHelper = require('../../lib/helpers/TokenHelper')
+
+      let request = new GatewayRequest(MockEvent)
+      let Config = {
+        publicKey: 'path/to/fake/dir'
+      }
+
+      let stub = sinon.stub(jwt, 'verify').callsArgWith(2, 'error')
+
+      let result = TokenHelper.setDecodedToken(request, Config, jwt)
+
+      mockFs.restore()
+      stub.restore()
+
+      return result.should.be.rejected
+    })
+
+    it('should set the decoded token if verification succeeds', () => {
+      let decodedToken = 'decodedToken'
+
+      const mockFs = require('mock-fs');
+      mockFs({
+        'path/to/fake/dir': 'publickey'
+      })
+
+      let TokenHelper = require('../../lib/helpers/TokenHelper')
+
+      let request = new GatewayRequest(MockEvent)
+      let Config = {
+        publicKey: 'path/to/fake/dir'
+      }
+
+      let stub = sinon.stub(jwt, 'verify').callsArgWith(2, null, decodedToken)
+
+      let result = TokenHelper.setDecodedToken(request, Config, jwt)
+
+      mockFs.restore()
+      stub.restore()
+
+      return result.should.eventually.have.property('decodedToken').deep.equal(decodedToken)
     })
   })
 })
