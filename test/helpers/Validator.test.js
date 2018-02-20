@@ -160,7 +160,7 @@ describe('Validator', () => {
 
       let adminScope = `admin_scope`
 
-      request.requiredScopes = [[`scope1`]]
+      request.requiredScopes = [`scope1`]
       request.scopes = [adminScope]
 
       let Config = {
@@ -178,7 +178,7 @@ describe('Validator', () => {
 
       let request = new GatewayRequest(MockEvent)
 
-      request.requiredScopes = [[`scope1`, `scope2`]]
+      request.requiredScopes = [`scope1`, `scope2`]
       request.scopes = [`scope1`]
 
       let Config = {
@@ -195,7 +195,7 @@ describe('Validator', () => {
 
       let request = new GatewayRequest(MockEvent)
 
-      request.requiredScopes = [[`scope1`]]
+      request.requiredScopes = [`scope1`]
       request.scopes = [`scope2`]
 
       let Config = {
@@ -212,7 +212,7 @@ describe('Validator', () => {
 
       let request = new GatewayRequest(MockEvent)
 
-      request.requiredScopes = [[`scope1`, `scope2`]]
+      request.requiredScopes = [`scope1`, `scope2`]
       request.scopes = [`scope1`, `scope2`]
 
       let Config = {
@@ -229,7 +229,7 @@ describe('Validator', () => {
 
       let request = new GatewayRequest(MockEvent)
 
-      request.requiredScopes = [[`scope1`, `scope2`]]
+      request.requiredScopes = [`scope1`, `scope2`]
       request.scopes = [`scope1`, `scope2`, `scope3`]
 
       let Config = {
