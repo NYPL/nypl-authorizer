@@ -59,12 +59,28 @@ describe('GatewayRequest', () => {
     request.getScopes().should.deep.equal([])
   })
 
-  it('should return an array of required scopes', () => {
-    let request = new GatewayRequest(MockEvent)
+  it('should return an array of required scopes (scope with space)', () => {
+    let testEvent = MockEvent
+
+    testEvent.requestContext.resourcePath = '/api/v0.1/bibs/{nyplSource}/{id}'
+
+    let request = new GatewayRequest(testEvent)
 
     request.setApiDocs(require('./../mock_docs.json'))
 
-    request.getRequiredScopeSets().should.deep.equal([[ 'openid', 'read:bib' ]])
+    request.getRequiredScopes().should.deep.equal([ 'openid', 'read:bib', 'test:scope' ])
+  })
+
+  it('should return an array of required scopes', () => {
+    let testEvent = MockEvent
+
+    testEvent.requestContext.resourcePath = '/api/v0.1/bibs'
+
+    let request = new GatewayRequest(testEvent)
+
+    request.setApiDocs(require('./../mock_docs.json'))
+
+    request.getRequiredScopes().should.deep.equal([ 'openid', 'read:bib' ])
   })
 
   it('should return an JSON principal ID', () => {

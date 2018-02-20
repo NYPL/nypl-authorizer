@@ -267,7 +267,8 @@
         "security": [
           {
             "api_auth": [
-              "openid read:bib"
+              "openid read:bib",
+              "test:scope"
             ]
           }
         ]
