@@ -59,7 +59,7 @@ describe('GatewayRequest', () => {
     request.getScopes().should.deep.equal([])
   })
 
-  it('should return an array of required scopes (scope with space)', () => {
+  it('should return an array of required scopes (includes scope with space)', () => {
     let testEvent = MockEvent
 
     testEvent.requestContext.resourcePath = '/api/v0.1/bibs/{nyplSource}/{id}'
