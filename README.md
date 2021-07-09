@@ -20,7 +20,7 @@ An AWS Lambda written in Node JS to act as a [custom authorizer](https://docs.aw
 > v1.0
 
 ## Requirements
-> [Node 6.10.0](https://nodejs.org/docs/v6.1.0/api/)
+> [Node 10.17.0](https://nodejs.org/docs/v10.17.0/api/)
 
 ## Getting Started
 
@@ -57,7 +57,7 @@ AWS_HANDLER=index.handler
 AWS_MEMORY_SIZE=128
 AWS_TIMEOUT=3
 AWS_DESCRIPTION=
-AWS_RUNTIME=nodejs6.10
+AWS_RUNTIME=nodejs10.x
 AWS_VPC_SUBNETS=
 AWS_VPC_SECURITY_GROUPS=
 AWS_TRACING_CONFIG=
