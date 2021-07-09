@@ -20,7 +20,7 @@ An AWS Lambda written in Node JS to act as a [custom authorizer](https://docs.aw
 > v1.0
 
 ## Requirements
-> [Node 10.17.0](https://nodejs.org/docs/v10.17.0/api/)
+> [Node 14.17.3](https://nodejs.org/docs/v14.17.3/api/)
 
 ## Getting Started
 
