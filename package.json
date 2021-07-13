@@ -1,11 +1,12 @@
 {
-  "name": "CustomAuthorizer",
+  "name": "NyplAuthorizer",
   "version": "0.1.0",
   "description": "Custom NYPL authorizer for AWS API Gateway",
   "main": "index.js",
   "scripts": {
-    "deploy-development": "./node_modules/.bin/node-lambda deploy -e development -f ./config/development.env -S ./config/event_sources_development.json -o arn:aws:iam::224280085904:role/lambda_basic_execution -a $aws_access_key_id_development -s $aws_secret_access_key_development",
-    "deploy-production": "./node_modules/.bin/node-lambda deploy -e production -f ./config/production.env -S ./config/event_sources_production.json -o arn:aws:iam::946183545209:role/lambda-full-access -a $aws_access_key_id_production -s $aws_secret_access_key_production",
+    "deploy-development": "./node_modules/.bin/node-lambda deploy -e development -f ./config/development.env -S ./config/event_sources_development.json -o arn:aws:iam::224280085904:role/lambda_basic_execution -a $AWS_ACCESS_KEY_ID_DEVELOPMENT -s $AWS_SECRET_ACCESS_KEY_DEVELOPMENT",
+    "deploy-qa": "./node_modules/.bin/node-lambda deploy -e qa -f ./config/qa.env -S ./config/event_sources_qa.json -o arn:aws:iam::946183545209:role/lambda-full-access -a $AWS_ACCESS_KEY_ID_QA -s $AWS_SECRET_ACCESS_KEY_QA",
+    "deploy-production": "./node_modules/.bin/node-lambda deploy -e production -f ./config/production.env -S ./config/event_sources_production.json -o arn:aws:iam::946183545209:role/lambda-full-access -a $AWS_ACCESS_KEY_ID_PRODUCTION -s $AWS_SECRET_ACCESS_KEY_PRODUCTION",
     "bib": "./node_modules/.bin/node-lambda run -f config/local.env -j sample/events/bib.json -x sample/events/context.json",
     "bibs": "./node_modules/.bin/node-lambda run -f config/local.env -j sample/events/bibs.json -x sample/events/context.json",
     "create-bib": "./node_modules/.bin/node-lambda run -f config/local.env -j sample/events/create_bib.json -x sample/events/context.json",
@@ -28,7 +29,7 @@
     "url": "git+https://github.com/NYPL/nypl-authorizer.git"
   },
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.21.1",
     "jsonwebtoken": "^8.1.0",
     "mock-fs": "^4.4.2",
     "node-cache": "^4.1.1",
@@ -40,7 +41,7 @@
     "chai-as-promised": "^7.1.1",
     "coveralls": "^3.0.0",
     "mocha": "^4.1.0",
-    "node-lambda": "^0.11.5",
+    "node-lambda": "^0.19.1",
     "nyc": "^11.4.1",
     "sinon": "^4.3.0",
     "standard": "^10.0.3"

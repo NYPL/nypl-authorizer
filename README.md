@@ -57,7 +57,7 @@ AWS_HANDLER=index.handler
 AWS_MEMORY_SIZE=128
 AWS_TIMEOUT=3
 AWS_DESCRIPTION=
-AWS_RUNTIME=nodejs10.x
+AWS_RUNTIME=nodejs14.x
 AWS_VPC_SUBNETS=
 AWS_VPC_SECURITY_GROUPS=
 AWS_TRACING_CONFIG=
@@ -115,7 +115,7 @@ $ npm run setup-production-sources
 ### Developing Locally
 To develop and run your Lambda locally you must ensure to complete `Step 1` and `Step 2` of the Setup process.
 
-***REMINDER:*** Your `./config/local.env` and `./.env` environment variables ***MUST*** be configured in order for the next step to work.
+***REMINDER:*** Your `./config/local.env` and `./.env` environment variables ***MUST*** be configured in order for the next step to work. Minimally, you need to have run `setup-node-lambda-env; npm run setup-local-env` and then added a test Bearer token to `DEBUG_TOKEN` in `config/local.env` (the long base64 encoded string following `Bearer` in requests to Platform API endpoints.)
 
 Next, run the following NPM command to use the **sample** events found in `./sample/events`.
 
@@ -124,7 +124,19 @@ Next, run the following NPM command to use the **sample** events found in `./sam
 $ npm run bib
 ```
 
-### Deploying your Lambda
+### Travis Deployment
+
+Travis will attempt to deploy this app as `NyplAuthorizer-development` in `nypl-sandbox`, and `NyplAuthorizer-qa` and `NyplAuthorizer-production` in `nypl-digital-dev. The API Gateway deployments in those accounts use a single authorizer across environments (i.e. in `nypl-digital-dev`, the API Gateway instance uses the same `nyplAuthorizerInternal` for both qa and production API Gateway deployments. There does not appear to be a way to configure environment specific authorizers. So although Travis will deploy this as `NyplAuthorizer-development`, `..-qa`, and `..-production`, each API Gateway instance will only use a single authorizer deployment.
+
+Also note: At writing, this app is deployed multiple times in both environments. The version used by the API Gateway deployment in `nypl-sandbox` and `nypl-digital-dev` appears to be `nyplAuthorizer-development` and `nyplAuthorizerInternal`, respectively.
+
+TODO: We should remove deprecated deployments of this authorizer, configure API Gateway to use the deployment names used by Travis, and document a procedure for testing `NyplAuthorizer-qa` deployments given that the `nypl-digital-dev` API Gateway instance can not be configured to connect to any but the production deployment.
+
+### Manual Deployment
+
+Note: Deploying lambdas directly from your workstation is discouraged. Push to deployment branches and rely on Travis when possible.
+
+
 To deploy your Lambda function via the `node-lambda` module __**ensure**__ you have completed all the steps of the [Setup](#setup-configurations) process and have added all configuration variables required.
 
 The following NPM Commands will execute the `node-lambda deploy` command mapping configurations to the proper environments (qa & production). These commands can be modified in `package.json`.
@@ -173,3 +185,7 @@ $ npm run lint // Will lint all files except those listed in package.json under 
 ```javascript
 $ npm run lint [filename].js // Will lint the specific JS file
 ```
+
+## Contributing
+
+This repo uses the [Development-QA-Main Git Workflow](https://github.com/NYPL/engineering-general/blob/master/standards/git-workflow.md#development-qa-main)
