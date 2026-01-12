@@ -28,8 +28,8 @@
     "url": "git+https://github.com/NYPL/nypl-authorizer.git"
   },
   "dependencies": {
-    "axios": "^0.17.1",
-    "jsonwebtoken": "^8.1.0",
+    "axios": "^1.13.2",
+    "jsonwebtoken": "^9.0.3",
     "mock-fs": "^4.4.2",
     "node-cache": "^4.1.1",
     "winston": "^2.4.0"
